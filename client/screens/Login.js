@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import { StyleSheet, View,ImageBackground, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import axios from 'axios'
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(email)
-  console.log(password)
 
+
+
+  const loginUser = async ()=>{
+    const data={
+      username: email,
+      password: password
+    }
+    try {
+      const response = await axios.post('http://10.0.2.2:5001/login',data)
+      console.log(response.data)
+      navigation.navigate('Home')
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <ImageBackground
       source={require('../assets/bg.png')} // Replace with your background image
@@ -33,7 +47,7 @@ const Login = ({ navigation }) => {
         value={password}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={loginUser}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
       <Text style={styles.forgotPasswordText}>Forgot password?</Text>
