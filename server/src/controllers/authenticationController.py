@@ -30,3 +30,5 @@ def login():
 @auth_bp.route('/', methods=['GET'])
 def get():
     return jsonify({'message': 'Hello World'})
+
+  

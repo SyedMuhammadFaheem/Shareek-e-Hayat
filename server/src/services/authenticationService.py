@@ -6,3 +6,9 @@ class UserService:
 
     def findUser(self, username, password):
         return User().findUser(username, password)
+
+    def updateUser(self,email, birth_date, gender, height, weight, interests,password,username):
+        return User().updateUser(email, birth_date, gender, height, weight, interests,password,username)
+
+    def deleteUser(self, email):
+        return User().deleteUser(email)    
