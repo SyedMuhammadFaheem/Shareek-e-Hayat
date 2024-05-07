@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 // import Checkbox from 'react-native-checkbox';
 // import DatePicker from 'react-native-date-picker';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   const [birthDate, setBirthDate] = useState(new Date());
   const [gender, setGender] = useState('male');
   const [height, setHeight] = useState('180');

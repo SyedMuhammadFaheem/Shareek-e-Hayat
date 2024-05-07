@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View,ImageBackground, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, ImageBackground, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -10,13 +11,14 @@ const Login = ({ navigation }) => {
 
   const loginUser = async ()=>{
     const data={
-      username: email,
+      email: email,
       password: password
     }
     try {
       const response = await axios.post('http://10.0.2.2:5001/login',data)
-      console.log(response.data)
-      navigation.navigate('Home')
+      console.log(response.data.ID.ID)
+      await AsyncStorage.setItem('userId', response.data.ID.ID.toString());
+      navigation.navigate('CardStack')
     } catch (error) {
       console.log(error)
     }

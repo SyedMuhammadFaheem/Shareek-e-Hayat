@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ImageBackground, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Text, Image, TouchableOpacity, ImageBackground, Platform, StatusBar } from 'react-native';
 
 const Home = ({ navigation }) => {
   return (
@@ -8,15 +8,15 @@ const Home = ({ navigation }) => {
       style={styles.container}
     >
       
-      {/* <Image
+      <Image
         source={require('../assets/icon2.png')} // Replace with your illustration image
         style={styles.illustration}
-      /> */}
-      <Text style={styles.title}>MINGLE </Text>
+      />
+      <Text style={styles.title}>MINGLE</Text>
       <Text style={styles.description}>
         
       </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Card')} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
         <Text style={styles.buttonText}>Let's Start →</Text>
       </TouchableOpacity>
       {/* Navigation dots here if necessary */}

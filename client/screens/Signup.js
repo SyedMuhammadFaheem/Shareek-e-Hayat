@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, ImageBackground, Text, TextInput, TouchableOpacity} from 'react-native';
 
 const Signup = ({ navigation }) => {
   const [fullName, setFullName] = useState('');

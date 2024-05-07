@@ -40,7 +40,7 @@ def update_user():
 @auth_bp.route('/delete-user', methods=['DELETE'])
 def delete_user():
     data = request.get_json()
-    email = data.get('email')
+    email = data['email']
     
     if not email:
         return jsonify({'error': 'Email is required'}), 400
@@ -48,3 +48,17 @@ def delete_user():
     UserService().deleteUser(email)
     
     return jsonify({'message': 'User deleted successfully'}), 200
+
+
+@auth_bp.route('/find-matched-users', methods=['POST'])
+def get_matched_user():
+    data = request.get_json()
+    id = data.get('id')
+    curr = data.get('curr')
+    print(curr)
+    
+    if not id:
+        return jsonify({'error': 'ID is required'}), 400
+    
+    users = UserService().findMatchedUsers(id, curr)
+    return users

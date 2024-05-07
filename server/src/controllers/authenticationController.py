@@ -44,7 +44,7 @@ def login():
 
     user = UserService().findUser(email, password)
     if user:
-        return jsonify({"message": "Login successful"})
+        return user
     else:
         return jsonify({"message": "Invalid credentials"}), 401
 

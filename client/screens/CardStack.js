@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'
 
-// Individual profile card
-const ProfileCard = ({ name, age, distance, matchPercentage, tags, bio }) => {
+const ProfileCard = ({ name, age, status, sex, orientation, body_type, pets, sign, speaks, ethnicity, essay0}) => {
+  const tags=[
+    orientation,
+    body_type,
+    pets,
+    sign,
+    speaks,
+    ethnicity
+  ]
   return (
     <View style={styles.card}>
       <Image style={styles.profileImage} source={require('../assets/user-icon.png')} />
       <Text style={styles.nameText}>{name}, {age}</Text>
-      <Text style={styles.distanceText}>{distance}</Text>
+      <Text style={styles.distanceText}>{status}</Text>
       <View style={styles.matchContainer}>
-        <Text style={styles.matchText}>{matchPercentage}% match</Text>
+        <Text style={styles.matchText}>{sex}</Text>
       </View>
       <View style={styles.tagContainer}>
         {tags.map(tag => (
@@ -19,19 +28,37 @@ const ProfileCard = ({ name, age, distance, matchPercentage, tags, bio }) => {
           </View>
         ))}
       </View>
-      <Text style={styles.bioText}>{bio}</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Match!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Nope!</Text>
-      </TouchableOpacity>
+      <Text style={styles.bioText}>{essay0}</Text>
+
+        <Text style={styles.buttonText}>Swipe Right for Match!</Text>
+      
+        <Text style={styles.buttonText}>Swipe Left for Reject!</Text>
+
     </View>
   );
 };
 
 // Main component handling swipe cards
-const CardStack = () => {
+export const CardStack = ({navigation}) => {
+  
+const [users, setUsers]= useState([])
+useEffect(()=>{
+  getCards()
+},[])
+const getCards= async()=>{
+  try {
+    const id = Number(await AsyncStorage.getItem('userId'))
+    console.log(Number(id))
+    const data={
+      id:id
+    }
+    const response= await axios.post('http://10.0.2.2:5000/find-matches',data)
+    console.log(response.data)
+    setUsers(response.data.users)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
   const cards = [
     {
       name: 'Matt',
@@ -83,17 +110,25 @@ const CardStack = () => {
 
   // Render each card
   const renderCard = (cardData) => {
-    return <ProfileCard {...cardData} />;
+    return <ProfileCard {...cardData}/>;
+  };
+
+  const navigateToProfile = () => {
+    console.log(navigation)
+    // navigation.navigate('Profile'); // Navigate to the 'Profile' screen
   };
 
   return (
     <View style={styles.container}>
+      {/* <TouchableOpacity style={styles.profileButton} onPress={navigateToProfile}>
+        <Text style={styles.profileButtonText}>Profile</Text>
+      </TouchableOpacity> */}
       <SwipeCards
-        cards={cards}
+        cards={users}
         renderCard={renderCard}
         handleYup={handleYup}
         handleNope={handleNope}
-        loop={false}
+        loop={true}
       />
     </View>
   );
@@ -175,6 +210,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
+  profileButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor: '#eb2f64',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
+  profileButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
-export default CardStack;

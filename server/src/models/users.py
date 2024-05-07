@@ -1,6 +1,5 @@
 from app import mongo
-from datetime import datetime
-
+from flask import jsonify
 
 class User:
     def __init__(self):
@@ -75,11 +74,55 @@ class User:
             {"Email": email, "Password": password}
         )
         if user:
+            user={"ID": user.get("ID", "")}
             return user
         user = mongo.db.get_collection("users").find_one(
             {"Email": email, "Password": int(password)}
         )
-        return user
+        user={"ID": user.get("ID", "")}
+        return jsonify({'ID':user})
+    
+    def findMatchedUsers(self, id, curr):
+        users=[]
+        for i in id:
+            if i!=curr:
+                users.append(mongo.db.get_collection("users").find_one(
+                    {"ID": i}
+                ))
+        serializedUsers = []
+        for user in users:
+            serialized_user = {
+                "ID": user.get("ID", ""),
+                "name": user.get("name", ""),
+                "Password": user.get("Password", ""),
+                "Email": user.get("Email", ""),
+                "age": user.get("age", ""),
+                "status": user.get("status", ""),
+                "sex": user.get("sex", ""),
+                "orientation": user.get("orientation", ""),
+                "body_type": user.get("body_type", ""),
+                "drinks": user.get("drinks", ""),
+                "education": user.get("education", ""),
+                "ethnicity": user.get("ethnicity", ""),
+                "height": user.get("height", ""),
+                "income": user.get("income", ""),
+                "job": user.get("job", ""),
+                "last_online": user.get("last_online", ""),
+                "location": user.get("location", ""),
+                "pets": user.get("pets", ""),
+                "religion": user.get("religion", ""),
+                "sign": user.get("sign", ""),
+                "smokes": user.get("smokes", ""),
+                "speaks": user.get("speaks", ""),
+                "essay0": user.get("essay0", ""),
+                "offspring": user.get("offspring", ""),
+                "diet": user.get("diet", ""),
+                "drugs": user.get("drugs", ""),
+            }
+            serializedUsers.append(serialized_user)
+
+    
+        return jsonify({'users': serializedUsers})
 
     def updateUser(
         self,
