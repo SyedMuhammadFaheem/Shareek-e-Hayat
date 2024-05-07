@@ -1,42 +1,100 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import SwipeCards from 'react-native-swipe-cards';
 
-const Card = () => {
-  // Placeholder for profile details. You might want to fetch this data from your backend.
-  const profile = {
-    name: 'Matt',
-    age: 23,
-    distance: '30 km away',
-    matchPercentage: 82,
-    tags: ['books', 'tech', 'dance'],
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+// Individual profile card
+const ProfileCard = ({ name, age, distance, matchPercentage, tags, bio }) => {
+  return (
+    <View style={styles.card}>
+      <Image style={styles.profileImage} source={require('../assets/user-icon.png')} />
+      <Text style={styles.nameText}>{name}, {age}</Text>
+      <Text style={styles.distanceText}>{distance}</Text>
+      <View style={styles.matchContainer}>
+        <Text style={styles.matchText}>{matchPercentage}% match</Text>
+      </View>
+      <View style={styles.tagContainer}>
+        {tags.map(tag => (
+          <View key={tag} style={styles.tag}>
+            <Text style={styles.tagText}>{tag}</Text>
+          </View>
+        ))}
+      </View>
+      <Text style={styles.bioText}>{bio}</Text>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Match!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Nope!</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+// Main component handling swipe cards
+const CardStack = () => {
+  const cards = [
+    {
+      name: 'Matt',
+      age: 23,
+      distance: '30 km away',
+      matchPercentage: 82,
+      tags: ['books', 'tech', 'dance'],
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+
+    {
+      name: 'Anthony',
+      age: 23,
+      distance: '30 km away',
+      matchPercentage: 82,
+      tags: ['books', 'tech', 'dance'],
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+
+    {
+      name: 'henry',
+      age: 23,
+      distance: '30 km away',
+      matchPercentage: 82,
+      tags: ['books', 'tech', 'dance'],
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+
+    {
+      name: 'robert',
+      age: 23,
+      distance: '30 km away',
+      matchPercentage: 82,
+      tags: ['books', 'tech', 'dance'],
+      bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+    },
+    // Add more profiles here as needed
+  ];
+
+  // Actions on swiping the card right
+  const handleYup = (card) => {
+    console.log("Yup for ", card.name);
+  };
+
+  // Actions on swiping the card left
+  const handleNope = (card) => {
+    console.log("Nope for ", card.name);
+  };
+
+  // Render each card
+  const renderCard = (cardData) => {
+    return <ProfileCard {...cardData} />;
   };
 
   return (
     <View style={styles.container}>
-        
-      <View style={styles.card}>
-        <Image style={styles.profileImage} source={require('../assets/user-icon.png')} />
-        <Text style={styles.nameText}>{profile.name}, {profile.age}</Text>
-        <Text style={styles.distanceText}>{profile.distance}</Text>
-        <View style={styles.matchContainer}>
-          <Text style={styles.matchText}>{profile.matchPercentage}% match</Text>
-        </View>
-        <View style={styles.tagContainer}>
-          {profile.tags.map(tag => (
-            <View key={tag} style={styles.tag}>
-              <Text style={styles.tagText}>{tag}</Text>
-            </View>
-          ))}
-        </View>
-        <Text style={styles.bioText}>{profile.bio}</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>match!</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>nope!</Text>
-        </TouchableOpacity>
-      </View>
+      <SwipeCards
+        cards={cards}
+        renderCard={renderCard}
+        handleYup={handleYup}
+        handleNope={handleNope}
+        loop={false}
+      />
     </View>
   );
 };
@@ -46,7 +104,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0', // Adjust the background color to match your design
+    backgroundColor: '#f0f0f0',
   },
   card: {
     width: '90%',
@@ -64,7 +122,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 100,
-    backgroundColor: '#ccc', // Placeholder color
+    backgroundColor: '#ccc',
     marginBottom: 10,
   },
   nameText: {
@@ -78,12 +136,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   matchContainer: {
-    // Additional styling may be required here
+    marginBottom: 10,
   },
   matchText: {
     color: '#eb2f64',
     fontWeight: 'bold',
-    marginBottom: 10,
   },
   tagContainer: {
     flexDirection: 'row',
@@ -118,13 +175,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  nopeButton: {
-    // Similar to the match button but with different color or style
-  },
-  nopeButtonText: {
-    // Similar to the buttonText but with different color or style
-  },
-  // ...add any other styles that you need to complete the design
 });
 
-export default Card;
+export default CardStack;

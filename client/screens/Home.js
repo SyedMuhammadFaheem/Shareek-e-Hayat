@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
       <Text style={styles.description}>
         
       </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Signup')} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('Card')} style={styles.button}>
         <Text style={styles.buttonText}>Let's Start →</Text>
       </TouchableOpacity>
       {/* Navigation dots here if necessary */}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import Checkbox from 'react-native-checkbox';
-import DatePicker from 'react-native-date-picker';
+// import Checkbox from 'react-native-checkbox';
+// import DatePicker from 'react-native-date-picker';
 
 const Profile = () => {
   const [birthDate, setBirthDate] = useState(new Date());
