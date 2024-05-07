@@ -9,8 +9,8 @@ class User:
         user_id = mongo.db.get_collection('users').insert_one({'username': username, 'password': password, 'email': email}).inserted_id
         return user_id
 
-    def findUser(self, username, password):
-        user = mongo.db.get_collection('users').find_one({'username': username, 'password': password})
+    def findUser(self, email, password):
+        user = mongo.db.get_collection('users').find_one({'email': email, 'password': password})
         return user
 
     def updateUser(self, email, birthDate, gender, height, weight, interests,password,username):

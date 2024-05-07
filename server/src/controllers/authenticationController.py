@@ -6,7 +6,6 @@ from services.authenticationService import UserService
 @auth_bp.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
-    print(data)
     username = data['username']
     password = data['password']
     email = data['email']
@@ -17,10 +16,10 @@ def signup():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data['username']
+    email = data['email']
     password = data['password']
     
-    user = UserService().findUser(username, password)
+    user = UserService().findUser(email, password)
     if user:
         return jsonify({'message': 'Login successful'})
     else:

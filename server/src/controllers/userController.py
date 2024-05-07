@@ -2,7 +2,7 @@ from flask import jsonify, request
 from services.authenticationService import UserService
 from . import auth_bp
 
-@auth_bp.route('/update_user', methods=['PUT'])
+@auth_bp.route('/update-user', methods=['PUT'])
 def update_user():
     data = request.get_json()
     email = data.get('email')
@@ -21,7 +21,7 @@ def update_user():
     
     return jsonify({'message': 'User updated successfully'}), 200  
 
-@auth_bp.route('/delete_user', methods=['DELETE'])
+@auth_bp.route('/delete-user', methods=['DELETE'])
 def delete_user():
     data = request.get_json()
     email = data.get('email')
