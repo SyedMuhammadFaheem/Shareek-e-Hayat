@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, View,ImageBackground, Text, ScrollView, TouchableOpacity, TextInput, Switch } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-<<<<<<< HEAD
+
 const Profile = () => {
-=======
+
 const Profile = ({navigation}) => {
   const [birthDate, setBirthDate] = useState(new Date());
->>>>>>> 779f4d684fb195b17b1f99c924804412a0b2ef69
+
   const [gender, setGender] = useState('male');
   const [lookingFor, setLookingFor] = useState('women');
   const [height, setHeight] = useState('180');
