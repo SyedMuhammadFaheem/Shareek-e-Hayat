@@ -1,4 +1,3 @@
-<<<<<<< HEAD:client/screens/Card.js
 import React from 'react';
 import { StyleSheet, View, Text, Image,ImageBackground, TouchableOpacity } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
@@ -9,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 const ProfileCard = ({ name, age, distance, matchPercentage, tags, bio }) => {
 
  
-=======
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
@@ -25,7 +23,6 @@ const ProfileCard = ({ name, age, status, sex, orientation, body_type, pets, sig
     speaks,
     ethnicity
   ]
->>>>>>> 779f4d684fb195b17b1f99c924804412a0b2ef69:client/screens/CardStack.js
   return (
   
     <View style={styles.card}>
@@ -54,14 +51,14 @@ const ProfileCard = ({ name, age, status, sex, orientation, body_type, pets, sig
 };
 
 // Main component handling swipe cards
-<<<<<<< HEAD:client/screens/Card.js
+
 const CardStack = () => {
   const navigation = useNavigation();
 
   const viewMyProfile = () => {
     navigation.navigate('Profile'); // Ensure 'MyProfile' is defined in your navigator
   };
-=======
+
 export const CardStack = ({navigation}) => {
   
 const [users, setUsers]= useState([])
@@ -82,7 +79,7 @@ const getCards= async()=>{
     console.log(error.message)
   }
 }
->>>>>>> 779f4d684fb195b17b1f99c924804412a0b2ef69:client/screens/CardStack.js
+
   const cards = [
     {
       name: 'Matt',
