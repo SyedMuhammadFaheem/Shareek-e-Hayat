@@ -1,3 +1,15 @@
+<<<<<<< HEAD:client/screens/Card.js
+import React from 'react';
+import { StyleSheet, View, Text, Image,ImageBackground, TouchableOpacity } from 'react-native';
+import SwipeCards from 'react-native-swipe-cards';
+import { useNavigation } from '@react-navigation/native';
+;
+
+// Individual profile card
+const ProfileCard = ({ name, age, distance, matchPercentage, tags, bio }) => {
+
+ 
+=======
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
@@ -13,7 +25,9 @@ const ProfileCard = ({ name, age, status, sex, orientation, body_type, pets, sig
     speaks,
     ethnicity
   ]
+>>>>>>> 779f4d684fb195b17b1f99c924804412a0b2ef69:client/screens/CardStack.js
   return (
+  
     <View style={styles.card}>
       <Image style={styles.profileImage} source={require('../assets/user-icon.png')} />
       <Text style={styles.nameText}>{name}, {age}</Text>
@@ -35,10 +49,19 @@ const ProfileCard = ({ name, age, status, sex, orientation, body_type, pets, sig
         <Text style={styles.buttonText}>Swipe Left for Reject!</Text>
 
     </View>
+   
   );
 };
 
 // Main component handling swipe cards
+<<<<<<< HEAD:client/screens/Card.js
+const CardStack = () => {
+  const navigation = useNavigation();
+
+  const viewMyProfile = () => {
+    navigation.navigate('Profile'); // Ensure 'MyProfile' is defined in your navigator
+  };
+=======
 export const CardStack = ({navigation}) => {
   
 const [users, setUsers]= useState([])
@@ -59,6 +82,7 @@ const getCards= async()=>{
     console.log(error.message)
   }
 }
+>>>>>>> 779f4d684fb195b17b1f99c924804412a0b2ef69:client/screens/CardStack.js
   const cards = [
     {
       name: 'Matt',
@@ -119,6 +143,7 @@ const getCards= async()=>{
   };
 
   return (
+    
     <View style={styles.container}>
       {/* <TouchableOpacity style={styles.profileButton} onPress={navigateToProfile}>
         <Text style={styles.profileButtonText}>Profile</Text>
@@ -130,7 +155,12 @@ const getCards= async()=>{
         handleNope={handleNope}
         loop={true}
       />
+
+      <TouchableOpacity style={styles.viewProfileButton} onPress={viewMyProfile}>
+        <Text style={styles.viewProfileButtonText}>View My Profile</Text>
+      </TouchableOpacity>
     </View>
+  
   );
 };
 
@@ -140,6 +170,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f0f0f0',
+    paddingBottom: 20, 
+  },
+  viewProfileButton: {
+    backgroundColor: '#4CAF50', // A green color for a positive action
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    position: 'absolute', // Keep the button at the bottom
+    bottom: 20, // Distance from the bottom
+    alignSelf: 'center' // Center it horizontally
+  },
+  viewProfileButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   card: {
     width: '90%',
