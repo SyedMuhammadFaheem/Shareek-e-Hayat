@@ -67,6 +67,11 @@ class User:
             )
             .inserted_id
         )
+        user = mongo.db.get_collection("users").find_one(
+            {"": email, "Password": password}
+        )
+        user={"ID": user}
+        return jsonify({'ID':user})
         return user_id
 
     def findUser(self, email, password):

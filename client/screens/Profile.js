@@ -1,104 +1,247 @@
-import React, { useState } from 'react';
-import { StyleSheet, View,ImageBackground, Text, ScrollView, TouchableOpacity, TextInput, Switch } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Switch,
+} from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
-
-const Profile = () => {
-
-const Profile = ({navigation}) => {
-  const [birthDate, setBirthDate] = useState(new Date());
-
-  const [gender, setGender] = useState('male');
-  const [lookingFor, setLookingFor] = useState('women');
-  const [height, setHeight] = useState('180');
-  const [weight, setWeight] = useState('65');
-  const [interests, setInterests] = useState({
-    sports: false,
-    tech: false,
-    books: false,
-    videogames: false,
-    gardening: false,
-    dance: false,
+const Profile = ({ navigation }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    age: "",
+    status: "",
+    sex: "",
+    orientation: "",
+    bodyType: "",
+    drinks: "",
+    education: "",
+    ethnicity: "",
+    height: "",
+    income: "",
+    job: "",
+    lastOnline: "",
+    location: "",
+    pets: "",
+    religion: "",
+    sign: "",
+    smokes: "",
+    speaks: "",
+    essay0: "",
+    offspring: "",
+    diet: "",
+    drugs: "",
   });
 
-  const toggleInterest = interest => {
-    setInterests({ ...interests, [interest]: !interests[interest] });
+  const handleChange = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = () => {
+   
+    console.log(formData);
   };
 
   return (
     <ImageBackground
-      source={require('../assets/bg.png')} // Replace with your background image
+      source={require("../assets/bg.png")} 
       style={styles.container}
     >
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>name</Text>
-        <TextInput style={styles.input} placeholder="John Doe" />
-        <Text style={styles.label}>birth date</Text>
-        <TextInput style={styles.input} placeholder="17/03/1990" />
-
-        <View style={styles.pickerContainer}>
+      <ScrollView>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="John Doe"
+            value={formData.name}
+            onChangeText={(value) => handleChange("name", value)}
+          />
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="example@example.com"
+            value={formData.email}
+            onChangeText={(value) => handleChange("email", value)}
+          />
+          <Text style={styles.label}>Age</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="30"
+            value={formData.age}
+            onChangeText={(value) => handleChange("age", value)}
+            keyboardType="numeric"
+          />
+          <Text style={styles.label}>Status</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Single"
+            value={formData.status}
+            onChangeText={(value) => handleChange("status", value)}
+          />
+          <Text style={styles.label}>Sex</Text>
           <Picker
-            selectedValue={gender}
-            onValueChange={(itemValue) => setGender(itemValue)}
+            selectedValue={formData.sex}
+            onValueChange={(value) => handleChange("sex", value)}
             style={styles.picker}
-            mode="dropdown">
-            <Picker.Item label="I am a man" value="male" />
-            <Picker.Item label="I am a woman" value="female" />
+            mode="dropdown"
+          >
+            <Picker.Item label="Male" value="male" />
+            <Picker.Item label="Female" value="female" />
+            {/* Add other options as needed */}
           </Picker>
-          <Picker
-            selectedValue={lookingFor}
-            onValueChange={(itemValue) => setLookingFor(itemValue)}
-            style={styles.picker}
-            mode="dropdown">
-            <Picker.Item label="looking for men" value="men" />
-            <Picker.Item label="looking for women" value="women" />
-          </Picker>
+          <Text style={styles.label}>Orientation</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Straight"
+            value={formData.orientation}
+            onChangeText={(value) => handleChange("orientation", value)}
+          />
+          <Text style={styles.label}>Body Type</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Slim"
+            value={formData.bodyType}
+            onChangeText={(value) => handleChange("bodyType", value)}
+          />
+          <Text style={styles.label}>Drinks</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Occasionally"
+            value={formData.drinks}
+            onChangeText={(value) => handleChange("drinks", value)}
+          />
+          <Text style={styles.label}>Education</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="College"
+            value={formData.education}
+            onChangeText={(value) => handleChange("education", value)}
+          />
+          <Text style={styles.label}>Ethnicity</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Caucasian"
+            value={formData.ethnicity}
+            onChangeText={(value) => handleChange("ethnicity", value)}
+          />
+          <Text style={styles.label}>Height</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="180"
+            value={formData.height}
+            onChangeText={(value) => handleChange("height", value)}
+            keyboardType="numeric"
+          />
+          <Text style={styles.label}>Income</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="50000"
+            value={formData.income}
+            onChangeText={(value) => handleChange("income", value)}
+            keyboardType="numeric"
+          />
+          <Text style={styles.label}>Job</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Engineer"
+            value={formData.job}
+            onChangeText={(value) => handleChange("job", value)}
+          />
+          <Text style={styles.label}>Last Online</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="2024-05-09"
+            value={formData.lastOnline}
+            onChangeText={(value) => handleChange("lastOnline", value)}
+          />
+          <Text style={styles.label}>Location</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="New York"
+            value={formData.location}
+            onChangeText={(value) => handleChange("location", value)}
+          />
+          <Text style={styles.label}>Pets</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Dog"
+            value={formData.pets}
+            onChangeText={(value) => handleChange("pets", value)}
+          />
+          <Text style={styles.label}>Religion</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Christian"
+            value={formData.religion}
+            onChangeText={(value) => handleChange("religion", value)}
+          />
+          <Text style={styles.label}>Sign</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Capricorn"
+            value={formData.sign}
+            onChangeText={(value) => handleChange("sign", value)}
+          />
+          <Text style={styles.label}>Smokes</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Occasionally"
+            value={formData.smokes}
+            onChangeText={(value) => handleChange("smokes", value)}
+          />
+          <Text style={styles.label}>Speaks</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="English"
+            value={formData.speaks}
+            onChangeText={(value) => handleChange("speaks", value)}
+          />
+          <Text style={styles.label}>Essay0</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Write something about yourself"
+            value={formData.essay0}
+            onChangeText={(value) => handleChange("essay0", value)}
+          />
+          <Text style={styles.label}>Offspring</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="None"
+            value={formData.offspring}
+            onChangeText={(value) => handleChange("offspring", value)}
+          />
+          <Text style={styles.label}>Diet</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Vegetarian"
+            value={formData.diet}
+            onChangeText={(value) => handleChange("diet", value)}
+          />
+          <Text style={styles.label}>Drugs</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Never"
+            value={formData.drugs}
+            onChangeText={(value) => handleChange("drugs", value)}
+          />
         </View>
 
-        <View style={styles.pickerContainer}>
-          <Picker
-            selectedValue={height}
-            onValueChange={(itemValue) => setHeight(itemValue)}
-            style={styles.picker}
-            mode="dropdown">
-            {[...Array(51)].map((_, index) => (
-              <Picker.Item label={`${150 + index} cm`} value={`${150 + index}`} key={index} />
-            ))}
-          </Picker>
-          <Picker
-            selectedValue={weight}
-            onValueChange={(itemValue) => setWeight(itemValue)}
-            style={styles.picker}
-            mode="dropdown">
-            {[...Array(101)].map((_, index) => (
-              <Picker.Item label={`${40 + index} kg`} value={`${40 + index}`} key={index} />
-            ))}
-          </Picker>
-        </View>
-
-        <View style={styles.interestsContainer}>
-          {Object.keys(interests).map((interest) => (
-            <View key={interest} style={styles.switchContainer}>
-              <Text style={styles.switchLabel}>{interest}</Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={interests[interest] ? "#f5dd4b" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={() => toggleInterest(interest)}
-                value={interests[interest]}
-              />
-            </View>
-          ))}
-        </View>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>let's go!</Text>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Let's Go!</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonSecondary}>
           <Text style={styles.buttonText}>I'm not prepared yet</Text>
         </TouchableOpacity>
-      </View>
-      
+      </ScrollView>
     </ImageBackground>
   );
 };
@@ -110,8 +253,8 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: 'black',
+    fontWeight: "bold",
+    color: "black",
     marginBottom: 20,
   },
   inputContainer: {
@@ -119,19 +262,19 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: 'black',
+    color: "black",
     marginBottom: 5,
   },
   input: {
     fontSize: 16,
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderBottomWidth: 1,
     marginBottom: 20,
   },
   pickerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
   picker: {
@@ -139,43 +282,42 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   interestsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   switchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '50%',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "50%",
     marginBottom: 10,
   },
   switchLabel: {
     fontSize: 16,
-    color: 'black',
+    color: "black",
   },
   button: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
     padding: 15,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 10,
-    marginTop:30,
-    width: 250, // Fixed width
-    alignSelf: 'center' // Center button in container
+    marginTop: 30,
+    width: 250, 
+    alignSelf: "center", 
   },
   buttonSecondary: {
-    backgroundColor: 'lightgray',
+    backgroundColor: "lightgray",
     padding: 15,
     borderRadius: 5,
-    alignItems: 'center',
-    width: 250, // Fixed width
-    alignSelf: 'center' // Center button in container
+    alignItems: "center",
+    width: 250, 
+    alignSelf: "center", 
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

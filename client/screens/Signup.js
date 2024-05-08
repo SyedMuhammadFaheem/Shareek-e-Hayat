@@ -1,30 +1,66 @@
-import React, { useState } from 'react';
-import { StyleSheet, ImageBackground, Text, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 
 const Signup = ({ navigation }) => {
-  const [fullName, setFullName] = useState('');
-  const [gender, setGender] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signupUser = async () => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+      age: "",
+      status: "",
+      sex: "",
+      orientation: "",
+      body_type: "",
+      drinks: "",
+      education: "",
+      ethnicity: "",
+      height: "",
+      income: "",
+      job: "",
+      last_online: "",
+      location: "",
+      pets: "",
+      religion: "",
+      sign: "",
+      smokes: "",
+      speaks: "",
+      essay0: "",
+      offspring: "",
+      diet: "",
+      drugs: "",
+    };
+    try {
+      const response = await axios.post("http://10.0.2.2:5001/signup", data);
+      console.log(response.data.ID.ID);
+      await AsyncStorage.setItem("userId", response.data.ID.ID.toString());
+      navigation.navigate("CardStack");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ImageBackground
-      source={require('../assets/bg.png')} // Replace with your background image
+      source={require("../assets/bg.png")}
       style={styles.container}
     >
-      
       <Text style={styles.header}>Create Account</Text>
       <TextInput
         style={styles.input}
-        placeholder="Full Name"
-        onChangeText={setFullName}
-        value={fullName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Gender"
-        onChangeText={setGender}
-        value={gender}
+        placeholder="Name"
+        onChangeText={setName}
+        value={name}
       />
       <TextInput
         style={styles.input}
@@ -41,10 +77,10 @@ const Signup = ({ navigation }) => {
         value={password}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={signupUser}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Text style={styles.loginText}>Already have an account? Log In</Text>
       </TouchableOpacity>
     </ImageBackground>
@@ -52,49 +88,45 @@ const Signup = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  // ...reuse styles from your Login component
-  // Only the header and buttonText should be updated for clarity:
   header: {
-    // ...other styles
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
-    color: '#000', // Change as needed
-    textAlign: 'center', // Added for center alignment
-    marginBottom:'10%'
+    color: "#000",
+    textAlign: "center",
+    marginBottom: "10%",
   },
   buttonText: {
-    // ...other styles
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
     fontSize: 16,
   },
   loginText: {
-    color: '#eb2f64', // Adjust the text color as needed
+    color: "#eb2f64",
     fontSize: 16,
-    marginTop: 15, // Add some space above the text
+    marginTop: 15,
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
     paddingHorizontal: 30,
   },
   heartIcon: {
-    width: 50, // Adjust the size as needed
-    height: 50, // Adjust the size as needed
+    width: 50,
+    height: 50,
     marginBottom: 20,
   },
-  
+
   subtitle: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
     marginBottom: 30,
   },
   input: {
-    width: '100%',
-    backgroundColor: '#f2f2f2', // Background color of input fields
+    width: "100%",
+    backgroundColor: "#f2f2f2",
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderRadius: 25,
@@ -102,14 +134,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    width: '100%',
-    backgroundColor: '#eb2f64', // Adjust the button color as needed
+    width: "100%",
+    backgroundColor: "#eb2f64",
     padding: 20,
     borderRadius: 25,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 10,
   },
-  // ...rest of your styles
 });
 
 export default Signup;

@@ -4,22 +4,21 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, ImageBackground, Platf
 const Home = ({ navigation }) => {
   return (
     <ImageBackground
-      source={require('../assets/bg.png')} // Replace with your background image
+      source={require('../assets/bg.png')} 
       style={styles.container}
     >
       
-      {/* <Image
-        source={require('../assets/icon2.png')} // Replace with your illustration image
+      <Image
+        source={require('../assets/icon2.png')}
         style={styles.illustration}
-      /> */}
+      />
       <Text style={styles.title}>MINGLE </Text>
       <Text style={styles.description}>
         
       </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
         <Text style={styles.buttonText}>Let's Start →</Text>
       </TouchableOpacity>
-      {/* Navigation dots here if necessary */}
     </ImageBackground>
   );
 };
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: '100%',
-    width:'100%', // This corresponds to 'h-full' in TailwindCSS.
+    width:'100%',
     marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     alignItems: 'center',
     justifyContent: 'center',
